@@ -10,10 +10,13 @@ export default new Vuex.Store({
     author: '',
   },
   getters: {
-    html() {
+    url: (state) => {
+      return state.url;
+    },
+    html: (state) => {
       return '<html...>';
     },
-    git() {
+    git: (state) => {
       return 'Add ABC\'s blablabla';
     },
   },

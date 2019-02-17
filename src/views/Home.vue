@@ -54,6 +54,22 @@ import { mapState } from 'vuex';
   },
 })
 export default class Home extends Vue {
+  private htmlValue: string;
+  private gitValue: string;
+
+  constructor() {
+    super();
+    this.htmlValue = '';
+    this.gitValue = '';
+  }
+
+  get url(): string {
+    return this.$store.getters.url;
+  }
+
+  set url(url) {
+    this.$store.commit('setUrl', url);
+  }
 
 }
 </script>
