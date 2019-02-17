@@ -8,7 +8,7 @@
             <form>
               <div class="form-group">
                 <label for="url">URL</label>
-                <input v-model="url" type="url" class="form-control form-control-lg" id="url" aria-describedby="urlHelp" placeholder="Enter URL">
+                <input v-model="url" type="url" class="form-control form-control-lg" id="url" aria-describedby="urlHelp" placeholder="Enter URL" autofocus>
                 <small id="urlHelp" class="form-text text-muted">We'll use mozilla/readability to parse and extract title and author.</small>
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
