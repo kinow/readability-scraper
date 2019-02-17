@@ -49,8 +49,13 @@ import { Component, Vue } from 'vue-property-decorator';
 import { mapState } from 'vuex';
 
 @Component({
+  data: () => {
+    return {
+      url: '',
+    };
+  },
   computed: {
-    ...mapState(['url', 'html', 'git']),
+    ...mapState(['html', 'git']),
   },
 })
 export default class Home extends Vue {

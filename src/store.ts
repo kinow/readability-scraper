@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import { JSDOM } from 'jsdom';
+import { Readability } from 'readability';
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    url: '',
     title: '',
     author: '',
   },
@@ -21,9 +23,6 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    setUrl(state, url) {
-      state.url = url;
-    },
     setTitle(state, title) {
       state.title = title;
     },
@@ -32,6 +31,14 @@ export default new Vuex.Store({
     },
   },
   actions: {
-
+    read({commit}, url) {
+      JSDOM.fromURL(url)
+          .then((dom) => {
+            const reader = new Readability(dom.window.document);
+            const article = reader.parse();
+            commit('setTitle', article.title);
+            commit('setAuthor', article.byline);
+          });
+    },
   },
 });
