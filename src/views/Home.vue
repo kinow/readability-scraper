@@ -8,7 +8,7 @@
             <form>
               <div class="form-group">
                 <label for="url">URL</label>
-                <input type="url" class="form-control form-control-lg" id="url" aria-describedby="urlHelp" placeholder="Enter URL">
+                <input v-model="url" type="url" class="form-control form-control-lg" id="url" aria-describedby="urlHelp" placeholder="Enter URL">
                 <small id="urlHelp" class="form-text text-muted">We'll use mozilla/readability to parse and extract title and author.</small>
               </div>
               <button type="submit" class="btn btn-primary">Submit</button>
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="html">
       <div class="col-sm">
         <div class="card">
           <div class="card-body">
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row" v-if="git">
       <div class="col-sm">
         <div class="card">
           <div class="card-body">
@@ -46,12 +46,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import { mapState } from 'vuex';
 
 @Component({
-  components: {
-    HelloWorld,
+  computed: {
+    ...mapState(['url', 'html', 'git']),
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+
+}
 </script>
