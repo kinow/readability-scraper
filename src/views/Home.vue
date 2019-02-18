@@ -12,11 +12,19 @@
                 <small id="urlHelp" class="form-text text-muted">We'll use mozilla/readability to parse and extract title and author.</small>
               </div>
               <button type="submit" class="btn btn-primary" @click="onSubmit" :disabled="isLoading">
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" v-if="isLoading"></span>
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" v-if="isLoading" required></span>
                 Submit
               </button>
             </form>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" v-if="hasAlerts">
+      <div class="col-sm">
+        <div v-for="alert in alerts" :class="cssClass(alert)" role="alert">
+          <h4 class="alert-heading" v-if="alert.title">{{ alert.title }}</h4>
+          {{ alert.detail }}
         </div>
       </div>
     </div>
@@ -49,11 +57,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { Alert, AlertType } from '@/utils';
 import { mapState } from 'vuex';
 
 @Component({
   computed: {
-    ...mapState(['isLoading']),
+    ...mapState(['isLoading', 'alerts']),
   },
 })
 export default class Home extends Vue {
@@ -80,6 +89,14 @@ export default class Home extends Vue {
 
   get git(): string {
     return this.$store.getters.git;
+  }
+
+  public hasAlerts(): boolean {
+    return this.$store.getters.alerts;
+  }
+
+  public cssClass(alert: Alert): string {
+    return 'alert alert-' + alert.type.valueOf();
   }
 }
 </script>
