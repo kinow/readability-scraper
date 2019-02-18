@@ -97,8 +97,18 @@ export default new Vuex.Store({
           const doc = new JSDOM(response.data);
           const reader = new Readability(doc.window.document);
           const article = reader.parse();
-          commit('setTitle', article.title);
-          commit('setAuthor', article.byline);
+          const author = article.byline;
+          const title = article.title;
+          if (!author || author.trim() === '' || !title || title.trim() === '') {
+            const alert = new Alert();
+            alert.detail = `Invalid title [${title}] or author [${author}]`;
+            alert.type = AlertType.WARNING;
+            commit('addAlert', alert);
+            commit('setLoading', false);
+            return;
+          }
+          commit('setTitle', title);
+          commit('setAuthor', author);
           commit('setLoading', false);
         })
         .catch((error) => {
