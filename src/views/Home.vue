@@ -34,7 +34,7 @@
           <div class="card-body">
             <div class="form-group">
               <label for="html">HTML</label>
-              <textarea class="form-control" id="html" rows="3">{{ html }}</textarea>
+              <textarea class="form-control" id="html" rows="4">{{ html }}</textarea>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
           <div class="card-body">
             <div class="form-group">
               <label for="html">Git commit message</label>
-              <textarea class="form-control" id="git" rows="3">{{ git }}</textarea>
+              <input class="form-control" id="git" :value="git" />
             </div>
           </div>
         </div>
